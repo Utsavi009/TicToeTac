@@ -1,12 +1,12 @@
 import '../index.css';
 
-const Square = ({value, squareClick, highlightWinner}) =>  {
+const Square = ({value, squareClick, highlightWinner, winner}) =>  {
 
   const btnClass=  (highlightWinner ? "winner-highlight" : "square-btn")
   
     return (
       <div>
-          <button className= {btnClass} onClick={squareClick}>{value}</button>
+          <button className= {btnClass} onClick={squareClick} disabled={winner}>{value}</button>
       </div>
     );
   }

@@ -1,12 +1,14 @@
 version: "3.8"
 services: 
   app:
+    stdin_open: true
     build: 
       context: .
+      dockerfile: Dockerfile.dev
     volumes: 
-      - .:/tictoetac
+      - .:/app
     ports: 
       - 3000:3000
-    image: app-react
-    container_name: react_container
+    image: app:tictoetacimage
+    container_name: tictoetac_container
     command: npm start

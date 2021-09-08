@@ -23,6 +23,23 @@ code {
   justify-content: center;
 }
 
+.reset-btn-container {
+  padding: 10px;
+}
+
+.reset-after-btn {
+  height:50px;
+  width:150px;
+  font-size: 20px;
+  background-color: aquamarine;
+}
+
+.reset-btn {
+  height:50px;
+  width:150px;
+  font-size: 20px;
+}
+
 .winner-highlight{
   height:120px;
   width:120px;

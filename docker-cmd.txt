@@ -2,13 +2,27 @@ npx create-react-app app-name   // to create react app
 
 >> Go tp respected react app dir
 
-docker build . -t tictoetacimage   or        // to create image
-docker build --tag tictoetacimage .
+docker build . -t tictoetacimage   or        // to build and tag the docker  image
+docker build --tag tictoetacimage . or
+docker build -t tictoetacimage:dev .
 
 docker image ls            // to see images
 
-docker run tictoetacimage  or                    // to run image
-docker tun --publish 3000:3000 tictoetacimage
+docker run tictoetacimage  or                    // to run image, container
+docker run --publish 3000:3000 tictoetacimage
+
+docker rm tictoetacimage -f     // to kill current running container
+
+docker-compose build or
+docker-compose up -d --build  // buid up container
+docker-compose down // kill the container
+
+docker-compose ps    // list the container
+
+docker-compose stop         //Bring down the container before moving on
+
+docker-compose run app
+docker-compose up
 
 
 <<< Open second cmd
@@ -17,3 +31,29 @@ docker ps             // To see container id
 
 docker exec -it container_id sh   // To see things in the container
 ls
+
+
+docker stop container_id         // to stop the container  
+
+
+<< Docker file info
+
+# pull official base image
+FROM node:13.12.0-alpine
+
+# set working directory
+WORKDIR /app
+
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
+
+# install app dependencies
+COPY package.json ./
+COPY package-lock.json ./
+RUN npm install
+
+# add app
+COPY . ./
+
+# start app
+CMD ["npm", "start"]    

@@ -12,6 +12,7 @@ const Board = () => {
         value={square[i]}
         squareClick={() => handleCLick(i)}
         highlightWinner={highlightWinner && highlightWinner.includes(i)}
+        winner= {winner}
       />
     );
   };
@@ -73,6 +74,9 @@ const Board = () => {
 
   return (
     <div className="board">
+      <div>
+        {winner ? <h1>{status}</h1> : <p>{status}</p>}
+      </div>
       <div className="board-row">
         {renderSquare(0)}
         {renderSquare(1)}
@@ -88,11 +92,9 @@ const Board = () => {
         {renderSquare(7)}
         {renderSquare(8)}
       </div>
-      <div>
-        {winner ? <h1>{status}</h1> : <p>{status}</p>}
-      </div>
-      <div>
-        <button onClick={() => setSquare(Array(9).fill(null))}>
+      
+      <div className="reset-btn-container">
+        <button className={winner ? "reset-after-btn" : "reset-btn"} onClick={() => setSquare(Array(9).fill(null))}>
           {" "}
           Reset Game
         </button>
