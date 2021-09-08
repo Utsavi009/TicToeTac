@@ -7,7 +7,13 @@ const Board = () => {
   const [X, setX] = useState(true);
 
   const renderSquare = (i) => {
-    return <Square value={square[i]} squareClick={() => handleCLick(i)} />;
+    return (
+      <Square
+        value={square[i]}
+        squareClick={() => handleCLick(i)}
+        highlightWinner={highlightWinner && highlightWinner.includes(i)}
+      />
+    );
   };
 
   const handleCLick = (i) => {
@@ -41,13 +47,22 @@ const Board = () => {
         squares[a] === squares[b] &&
         squares[a] === squares[c]
       ) {
-        return squares[a];
+        return {
+          winner: squares[a],
+          line: lines[i],
+        };
       }
     }
-    return null;
+
+    return {
+      winner: null,
+      line: null,
+    };
   };
 
-  const winner = calculateWinner(square);
+  const winnerInfo = calculateWinner(square);
+  const winner = winnerInfo.winner;
+  const highlightWinner = winnerInfo.line;
 
   let status;
   if (winner) {
@@ -73,10 +88,14 @@ const Board = () => {
         {renderSquare(7)}
         {renderSquare(8)}
       </div>
-
-      {status}
       <div>
-          <button onClick={() => setSquare(Array(9).fill(null))}> Reset Game</button>
+        {winner ? <h1>{status}</h1> : <p>{status}</p>}
+      </div>
+      <div>
+        <button onClick={() => setSquare(Array(9).fill(null))}>
+          {" "}
+          Reset Game
+        </button>
       </div>
     </div>
   );
