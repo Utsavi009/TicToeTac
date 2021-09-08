@@ -1,0 +1,19 @@
+npx create-react-app app-name   // to create react app
+
+>> Go tp respected react app dir
+
+docker build . -t tictoetacimage   or        // to create image
+docker build --tag tictoetacimage .
+
+docker image ls            // to see images
+
+docker run tictoetacimage  or                    // to run image
+docker tun --publish 3000:3000 tictoetacimage
+
+
+<<< Open second cmd
+
+docker ps             // To see container id
+
+docker exec -it container_id sh   // To see things in the container
+ls
