@@ -1,5 +1,5 @@
 FROM node:alpine
-WORKDIR '/app'
+WORKDIR '/tictoetac'
 
 COPY package.json .
 RUN npm install
