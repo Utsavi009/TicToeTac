@@ -2,9 +2,18 @@ import { useState } from "react";
 import Square from "./Square";
 import "../index.css";
 
+
 const Board = () => {
-  const [square, setSquare] = useState(Array(9).fill(null));
+  const [square, setSquare] = useState(Array(9).fill(null));   //initialize array of 9 with null value
   const [X, setX] = useState(true);
+
+  //console.log(square)
+
+
+
+  const handleDraw = (currentValue) => currentValue != null
+  const isDraw = square.every(handleDraw)    // to check whether the array has all null value or not
+  //console.log(isDraw)
 
   const renderSquare = (i) => {
     return (
@@ -23,8 +32,9 @@ const Board = () => {
       squares[i] = X ? "X" : "0";
       setSquare(squares);
       setX(!X);
-    } else {
-      alert("Can not do that");
+    } 
+    else {
+      alert("Can not change");
     }
   };
 
@@ -41,7 +51,7 @@ const Board = () => {
     ];
 
     for (let i = 0; i < lines.length; i++) {
-      const [a, b, c] = lines[i];
+      const [a, b, c] = lines[i];        // [a, b, c] = [0, 1, 2]
 
       if (
         squares[a] &&
@@ -68,14 +78,17 @@ const Board = () => {
   let status;
   if (winner) {
     status = `Winner : ${winner}`;
-  } else {
+  } else if(isDraw) {
+    status = "It's a draw"
+  }else {
     status = "Player turn: " + (X ? "X" : "0");
   }
 
   return (
     <div className="board">
+      <h1 className='header'>Tic Toe Tac</h1>
       <div>
-        {winner ? <h1>{status}</h1> : <p>{status}</p>}
+        {winner ? <h1 style={{color: 'green'}}>{status}</h1> : isDraw ? <h2 style={{color: 'red'}}>{status}</h2> : <p>{status}</p>}
       </div>
       <div className="board-row">
         {renderSquare(0)}
@@ -94,7 +107,7 @@ const Board = () => {
       </div>
       
       <div className="reset-btn-container">
-        <button className={winner ? "reset-after-btn" : "reset-btn"} onClick={() => setSquare(Array(9).fill(null))}>
+        <button className={winner || isDraw ? "reset-after-btn" : "reset-btn"} onClick={() => setSquare(Array(9).fill(null))}>
           {" "}
           Reset Game
         </button>

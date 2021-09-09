@@ -67,3 +67,8 @@ code {
 .hide{
   display:none;
 };
+
+.navbar, .todo-list{
+  display: flex;
+  flex-direction: row;
+}

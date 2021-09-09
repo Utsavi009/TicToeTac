@@ -1,11 +1,13 @@
-import Board from './components/Board';
+import AppRouter from './components/AppRouter';
+import Navbar from './components/Navbar';
+
 
 const App = () =>  {
   
   return (
     <div className="App">
-      <h1 className='header'>Tic Toe Tac</h1>
-      <Board />
+      <Navbar />
+      <AppRouter />
     </div>
   );
 }
